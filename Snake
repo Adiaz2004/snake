@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Snake : MonoBehaviour
+{
+    //variables
+    private Vector2 direction;
+    list<transform> segment; //variable to store all the parts of the bod of the snake
+    public transform bodyPrefab; //variable to store the body
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        segments = new 
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //change direction of the snake
+        if (Input.GetKeyDown(KeyCode.W)) // when w key is pressd
+        {
+            direction = Vector2.up;    //go up
+        }
+        else if (Input.GetKeyDown(KeyCode.A)) //when A key is pressed
+        {
+            direction = Vector2.Left;   //go left
+        }
+        else if (Input.GetKeyDown(KeyCode.S)) // when S key is pressed
+        {
+            direction = Vector2.Down; // go down
+        }
+        else if (Input.GetKeyDown(KeyCode.D)) // when D key is pressed
+        {
+            direction = Vector2.Right; //go right 
+        }
+    }
+
+
+
+    //FixUpdate is clled a dix intervale
+    void FixedUpdate()
+    {
+        //Move the snake
+        this.transform.position = new Vector2(
+            Mathf.Round(this.transform.position.x) + direction.x,
+            Mathf.Round(this.transform.position.y) + direction.y
+            );
+    }
+
+    //Function to make the snake grow
+    void Grow()
+    {
+        Transform segment = Initiate(this.bodyPrefab);                    //creates a new body part
+        segment.position = segments[segments.Counts.Count - 1].position;  //position it on the back of the snake
+        segments.Add(segment);                                            //addd it to the list
+    }
+
+    //Function for collision
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Food")
+        {
+            Grow();
+        }
+    }
+}
