@@ -29,4 +29,9 @@ public class Food : MonoBehaviour
 
         transform.position = new Vector2(Mathf.Round(x), Mathf.Round(y));  //round values, change position of 
     }
+    //Function  for collision
+    void OnTriggerEnter2D (Collider2D other)
+    {
+        RandomPos();
+    }
 }
