@@ -10,7 +10,7 @@ public class Food : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        RandomPos(); // randomize position of the food
     }
 
     // Update is called once per frame
@@ -24,9 +24,9 @@ public class Food : MonoBehaviour
     {
         Bounds bounds = grid.bounds;                             //declare the limits of the space
 
-        float x = RandomRange().Range(bounds.min.x, bounds.max.x); //give a random value to x within the limits
-        float y = RandomRange().Range(bounds.min.y, bounds.max.y); //give a random value to y within the limits
+        float x = Random.Range().Range(bounds.min.x, bounds.max.x); //give a random value to x within the limits
+        float y = Random.Range().Range(bounds.min.y, bounds.max.y); //give a random value to y within the limits
 
-        transform.position = new Vector2(Mathf.Rounds(x).Mathf.Rounds(y));  //round values, change position of 
+        transform.position = new Vector2(Mathf.Round(x), Mathf.Round(y));  //round values, change position of 
     }
 }
