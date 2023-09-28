@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Food : MonoBehaviour
+{
+    //variables
+    public BoxCollider2D grid;     //
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    //Function to randomize the position of the food
+    private void RandomPos()
+    {
+        Bounds bounds = grid.bounds;                             //declare the limits of the space
+
+        float x = RandomRange().Range(bounds.min.x, bounds.max.x); //give a random value to x within the limits
+        float y = RandomRange().Range(bounds.min.y, bounds.max.y); //give a random value to y within the limits
+
+        transform.position = new Vector2(Mathf.Rounds(x).Mathf.Rounds(y));  //round values, change position of 
+    }
+}
