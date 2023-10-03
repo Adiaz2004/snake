@@ -43,9 +43,9 @@ public class Snake : MonoBehaviour
     void FixedUpdate()
     {
         //move to body of the snake 
-        for (int i = segments.Count - 1 ; i >= 0; i--) //for each segment of the snake
+        for (int i = segments.Count - 1; i > 0; i--) //for each segment of the snake
         {
-            segments[i].position = segments[i-1].position;    //move the body
+            segments[i].position = segments[i - 1].position;    //move the body
         }
 
         //Move the snake
@@ -70,5 +70,10 @@ public class Snake : MonoBehaviour
         {
             Grow();
         }
+        else if (other.tag == "dead")
+        {
+            Debug.Log("Hit");
+        }
     }
+
 }
