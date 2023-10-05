@@ -90,6 +90,7 @@ public class Snake : MonoBehaviour
         if (other.tag == "Food") //check if the other objecs is food
         {
             Grow(); //tun the frow function
+            Time.fixedDeltaTime -= 0.01f;
         }
         else if (other.tag == "dead") //checks if the other objects is an obstacles
         {
