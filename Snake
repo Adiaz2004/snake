@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class Snake : MonoBehaviour
 {
     //variables
     private Vector2 direction; //control directin of the movement
+    public bool goingUp;
+    public bool goingDown;
+    public bool goingLeft;
+    public bool goingRight;
 
     List<Transform> segments; //variable to store all the parts of the bod of the snake
     public Transform bodyPrefab; //variable to store the body
@@ -21,21 +26,37 @@ public class Snake : MonoBehaviour
     void Update()
     {
         //change direction of the snake
-        if (Input.GetKeyDown(KeyCode.W)) // when w key is pressd
+        if (Input.GetKeyDown(KeyCode.W) && goingDown != true) // when w key is pressd
         {
             direction = Vector2.up;    //go up
+            goingUp = true;
+            goingDown = false;
+            goingLeft = false;
+            goingRight = false;
         }
-        else if (Input.GetKeyDown(KeyCode.A)) //when A key is pressed
+        else if (Input.GetKeyDown(KeyCode.A) && goingRight != true) //when A key is pressed
         {
             direction = Vector2.left;   //go left
+            goingUp = false;
+            goingDown = false;
+            goingLeft = true;
+            goingRight = false;
         }
-        else if (Input.GetKeyDown(KeyCode.S)) // when S key is pressed
+        else if (Input.GetKeyDown(KeyCode.S) && goingUp != true) // when S key is pressed
         {
             direction = Vector2.down; // go down
+            goingUp = false;
+            goingDown = true;
+            goingLeft = false;
+            goingRight= false;  
         }
-        else if (Input.GetKeyDown(KeyCode.D)) // when D key is pressed
+        else if (Input.GetKeyDown(KeyCode.D) && goingLeft != true) // when D key is pressed
         {
             direction = Vector2.right; //go right 
+            goingUp = false;
+            goingDown = false;
+            goingLeft = false;  
+            goingRight = true;
         }
     }
 
@@ -66,13 +87,15 @@ public class Snake : MonoBehaviour
     //Function for collision
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Food")
+        if (other.tag == "Food") //check if the other objecs is food
         {
-            Grow();
+            Grow(); //tun the frow function
         }
-        else if (other.tag == "dead")
+        else if (other.tag == "dead") //checks if the other objects is an obstacles
         {
             Debug.Log("Hit");
+            SceneManager.LoadScene("EndScene"); //change to the end scene
+          //SceneManager.LoadScene("GameScene"); //restart the game
         }
     }
 
